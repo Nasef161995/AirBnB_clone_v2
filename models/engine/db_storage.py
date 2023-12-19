@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """This module defines a class to manage DB Storage for hbnb clone"""
-from relationship_state import Base, State
-from relationship_city import City
+from models.base_model import BaseModel, Base
+from models.city import City
+from models.state import State
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from os import getenv
