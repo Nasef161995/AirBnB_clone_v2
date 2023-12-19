@@ -13,8 +13,9 @@ from os import getenv
 
 
 classes = {
+    'State': State, 'City': City,
     'User': User, 'Place': Place,
-    'State': State, 'City': City, 'Amenity': Amenity,
+    'Amenity': Amenity,
     'Review': Review
 }
 
@@ -44,12 +45,17 @@ class DBStorage:
         if cls is None:
             for elements in classes.values():
                 table = self.__session.query(elements).all()
+                for obj in table:
+                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    my_dict[key] = obj
+            return my_dict
         else:
+            my_dict ={}
             table = self.__session.query(cls).all()
-        for obj in table:
-            key = f"{obj.__class__.__name__}.{obj.id}"
-            my_dict[key] = obj
-        return my_dict
+            for obj in table:
+                key = f"{obj.__class__.__name__}.{obj.id}"
+                my_dict[key] = obj
+            return my_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
