@@ -43,8 +43,9 @@ class DBStorage:
         """Returns a dictionary of models currently in storage"""
         my_dict = {}
         if cls is None:
-            for elements in classes.values():
-                table = self.__session.query(elements).all()
+            for obj in classes.items():
+                print(obj)
+                table = self.__session.query(obj).all()
                 for obj in table:
                     key = f"{obj.__class__.__name__}.{obj.id}"
                     my_dict[key] = obj
