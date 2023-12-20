@@ -52,15 +52,15 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, default=0, nullable=False)
         latitude = Column(Float)
         longitude = Column(Float)
-        amenity_ids = []
+        # amenity_ids = []
         reviews = relationship(
             "Review",
             cascade='all, delete',
             backref="place")
         amenities = relationship(
             "Amenity",
-            secondary=place_amenity,
-            viewonly=False, overlaps='place_amenities')
+            secondary=place_amenity, overlaps='place_amenities',
+            viewonly=False)
     else:
         city_id = ""
         user_id = ""
@@ -91,7 +91,7 @@ class Place(BaseModel, Base):
             my_list = []
             my_dict = models.storage.all('Amenity')
             for key, value in my_dict.items():
-                if self.id == value['amenity_ids']:
+                if self.id == key.amenity_ids:
                     my_list.append(value)
             return my_list
 
