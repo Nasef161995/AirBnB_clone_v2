@@ -13,9 +13,10 @@ from os import getenv
 import sqlalchemy as db
 
 classes = {"City": City, "State": State
-        #    ,"Place": Place,
-        #    "Review": Review, "Amenity": Amenity, "User": User
-}
+           #    ,"Place": Place,
+           #    "Review": Review, "Amenity": Amenity, "User": User
+           }
+
 
 class DBStorage:
     __engine = None

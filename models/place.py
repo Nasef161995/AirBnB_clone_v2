@@ -42,7 +42,7 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, default=0, nullable=False)
         latitude = Column(Float, nullable=True)
         longitude = Column(Float, nullable=True)
-        amenity_ids = []
+        # amenity_ids = []
         reviews = relationship(
             "Review",
             cascade='all, delete',
@@ -50,7 +50,7 @@ class Place(BaseModel, Base):
         amenities = relationship(
             "Amenity",
             secondary=place_amenity,
-            viewonly=False)
+            viewonly=False, overlaps='place_amenities')
     else:
         city_id = ""
         user_id = ""
@@ -74,17 +74,17 @@ class Place(BaseModel, Base):
                     my_list.append(value)
             return my_list
 
-    @property
-    def amenities(self):
-        """amenities method"""
-        my_list = []
-        my_dict = models.storage.all('Amenity')
-        for key, value in my_dict.items():
-            if self.id == key.amenity_ids:
-                my_list.append(value)
-        return my_list
+        @property
+        def amenities(self):
+            """amenities method"""
+            my_list = []
+            my_dict = models.storage.all('Amenity')
+            for key, value in my_dict.items():
+                if self.id == key.amenity_ids:
+                    my_list.append(value)
+            return my_list
 
-    @amenities.setter
-    def amenities(self, value):
-        if isinstance(value, Amenity):
-            self.amenity_ids.append(value.id)
+        @amenities.setter
+        def amenities(self, value):
+            if isinstance(value, Amenity):
+                self.amenity_ids.append(value.id)
