@@ -144,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
             for key, value in new_dict.items():
                 setattr(new_instance, key, value)
                 new_instance.save()
-            
+
         print(new_instance.id)
         storage.save()
 
