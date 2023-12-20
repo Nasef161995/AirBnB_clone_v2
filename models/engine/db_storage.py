@@ -10,16 +10,12 @@ from models.amenity import Amenity
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
-from sqlalchemy.orm import class_mapper
+import sqlalchemy as db
 
-classes = {
-    'State': State, 'City': City,
-    'User': User, 'Place': Place,
-    'Amenity': Amenity,
-    'Review': Review
+classes = {"City": City, "State": State
 }
-
-
+# classes = ["states", "cities"] 
+# , "user", "place", "amenity", "review"
 class DBStorage:
     __engine = None
     __session = None
@@ -43,7 +39,7 @@ class DBStorage:
         """Returns a dictionary of models currently in storage"""
         my_dict = {}
         if cls is None:
-            for obj in classes.keys():
+            for obj in classes:
                 print(obj)
                 table = self.__session.query(classes[obj]).all()
                 for obj in table:
