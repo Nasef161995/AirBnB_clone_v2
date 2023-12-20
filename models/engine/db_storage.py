@@ -12,9 +12,8 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 import sqlalchemy as db
 
-classes = {"City": City, "State": State
-           #    ,"Place": Place,
-           #    "Review": Review, "Amenity": Amenity, "User": User
+classes = {"City": City, "State": State, "Place": Place, "Review": Review,
+           "Amenity": User, "User": Amenity
            }
 
 
@@ -43,6 +42,10 @@ class DBStorage:
         if cls is None:
             for obj in classes:
                 table = self.__session.query(classes[obj]).all()
+                for obj in table:
+                    key = f"{obj.__class__.__name__}.{obj.id}"
+                    my_dict[key] = obj
+            return my_dict
         else:
             table = self.__session.query(cls).all()
         for obj in table:
