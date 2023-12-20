@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship
 import models
 from os import getenv
 
+
 class City(BaseModel, Base):
     """ The city class, contains state ID and name """
 
@@ -16,5 +17,4 @@ class City(BaseModel, Base):
     else:
         state_id = ""
         name = ""
-    
     # places = relationship("Place",  cascade='all, delete', backref="cities")
