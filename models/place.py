@@ -83,16 +83,16 @@ class Place(BaseModel, Base):
                 if self.id == key.place_id:
                     my_list.append(value)
             return my_list
-
+            
     if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def amenities(self):
             """amenities method"""
             my_list = []
             my_dict = models.storage.all('Amenity')
-            for m in my_dict.values():
-                if m.id in self.amenity_ids:
-                    my_list.append(m)
+            for key, value in my_dict.items():
+                if self.id == value['amenity_ids']:
+                    my_list.append(value)
             return my_list
 
         @amenities.setter
