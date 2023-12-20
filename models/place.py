@@ -59,8 +59,8 @@ class Place(BaseModel, Base):
             backref="place")
         amenities = relationship(
             "Amenity",
-            secondary='place_amenity', overlaps='place_amenities',
-            viewonly=False, backref='place_amenities')
+            secondary=place_amenity,
+            viewonly=False, overlaps='place_amenities')
     else:
         city_id = ""
         user_id = ""
@@ -83,15 +83,14 @@ class Place(BaseModel, Base):
                 if self.id == key.place_id:
                     my_list.append(value)
             return my_list
-            
-    if getenv("HBNB_TYPE_STORAGE") != "db":
+
         @property
         def amenities(self):
             """amenities method"""
             my_list = []
             my_dict = models.storage.all('Amenity')
-            for value in my_dict.values():
-                if value.id in self.amenity_ids:
+            for key, value in my_dict.items():
+                if self.id == key.amenity_ids:
                     my_list.append(value)
             return my_list
 
