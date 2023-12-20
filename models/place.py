@@ -52,7 +52,7 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, default=0, nullable=False)
         latitude = Column(Float)
         longitude = Column(Float)
-        # amenity_ids = []
+        amenity_ids = []
         reviews = relationship(
             "Review",
             cascade='all, delete',
