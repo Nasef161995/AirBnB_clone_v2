@@ -84,17 +84,17 @@ class Place(BaseModel, Base):
                     my_list.append(value)
             return my_list
 
-        @property
-        def amenities(self):
-            """amenities method"""
-            my_list = []
-            my_dict = models.storage.all('Amenity')
-            for key, value in my_dict.items():
-                if self.id == value['amenity_ids']:
-                    my_list.append(value)
-            return my_list
+    @property
+    def amenities(self):
+        """amenities method"""
+        my_list = []
+        my_dict = models.storage.all('Amenity')
+        for key, value in my_dict.items():
+            if self.id == value['amenity_ids']:
+                my_list.append(value)
+        return my_list
 
-        @amenities.setter
-        def amenities(self, value):
-            if isinstance(value, Amenity):
-                self.amenity_ids.append(value.id)
+    @amenities.setter
+    def amenities(self, value):
+        if isinstance(value, Amenity):
+            self.amenity_ids.append(value.id)
