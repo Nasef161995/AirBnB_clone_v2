@@ -12,11 +12,11 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 import sqlalchemy as db
 
-classes = {"City": City, "State": State,
+classes = {"City": City, "State": State
+        #    ,"Place": Place,
         #    "Review": Review, "Amenity": Amenity, "User": User
 }
-# classes = ["states", "cities"] 
-# , "user", "place", "amenity", "review"
+
 class DBStorage:
     __engine = None
     __session = None
@@ -39,23 +39,15 @@ class DBStorage:
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
         my_dict = {}
-        if cls is not None:
-            table = self.__session.query(cls).all()
-        else:
+        if cls is None:
             for obj in classes:
-                print(obj)
                 table = self.__session.query(classes[obj]).all()
-                for obj in table:
-                    key = f"{obj.__class__.__name__}.{obj.id}"
-                    my_dict[key] = obj
+        else:
+            table = self.__session.query(cls).all()
+        for obj in table:
+            key = f"{obj.__class__.__name__}.{obj.id}"
+            my_dict[key] = obj
         return my_dict
-        # else:
-        #     my_dict = {}
-        #     table = self.__session.query(cls).all()
-        #     for obj in table:
-        #         key = f"{obj.__class__.__name__}.{obj.id}"
-        #         my_dict[key] = obj
-        #     return my_dict
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
