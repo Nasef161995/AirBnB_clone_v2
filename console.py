@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
         for key, value in my_dict.items():
             if value.isdigit():
                 new_dict[key] = int(value)
-            elif "." in value:
+            elif "." in value and value.isdigit() == 1:
                 new_dict[key] = float(value)
             else:
                 new_dict[key] = value.strip('"').replace("_", " ")
