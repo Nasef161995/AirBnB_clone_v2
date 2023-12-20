@@ -13,7 +13,7 @@ from sqlalchemy.ext.declarative import declarative_base
 if getenv("HBNB_TYPE_STORAGE") == 'db':
 
     place_amenity = Table(
-        'place_amenity', metadata=Base.metadata,
+        'place_amenity', Base.metadata,
         Column(
             'place_id',
             String(60),
