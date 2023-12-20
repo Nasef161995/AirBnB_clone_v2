@@ -90,8 +90,8 @@ class Place(BaseModel, Base):
             """amenities method"""
             my_list = []
             my_dict = models.storage.all('Amenity')
-            for key, value in my_dict.items():
-                if self.id == key.amenity_ids:
+            for value in my_dict.values():
+                if value.id in self.amenity_ids:
                     my_list.append(value)
             return my_list
 
