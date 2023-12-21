@@ -8,6 +8,8 @@ from models.user import User
 from models.review import Review
 from models.place import Place
 from models.amenity import Amenity
+
+
 if getenv("HBNB_TYPE_STORAGE") == 'db':
     from models.engine.db_storage import DBStorage
     storage = DBStorage()
