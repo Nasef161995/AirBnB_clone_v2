@@ -26,11 +26,9 @@ def python(text="is cool"):
     return f"Python {text.replace('_', ' ')}"
 
 
-@app.route("/number/<n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def num(n):
-    value = int(n)
-    if isinstance(value, int):
-        return f"{value} is a number"
+    return f"{n} is a number"
 
 
 if __name__ == "__main__":
