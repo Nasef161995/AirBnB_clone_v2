@@ -17,8 +17,8 @@ def hello_hbnb():
 
 @app.route("/c/<text>", strict_slashes=False)
 def hello_C(text):
-    part = text.split("_")
-    return f"C {part[0]} {part[1]}" 
+    return f"C {text.replace('_', ' ')}"
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
